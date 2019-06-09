@@ -5,7 +5,7 @@
         {{> format_moodlemoot/sections }}
 
         {{^isenrolled}}
-            <div class="notenrolled">DEMAIS CONTEUDOS RESTRITOS AOS INSCRITOS NO EVENTO</div>
+            <div class="notenrolled">{{#str}}restrictcontentmsg, format_moodlemoot{{/str}}</div>
 
             {{> format_moodlemoot/enrol_button }}
         {{/isenrolled}}
@@ -18,15 +18,15 @@
             <p class="m-t-1"><span class="btn btn-lg btn-block btn-success">{{{ price }}}</span></p>
         {{/isenrolled}}
 
-        <h4 {{^isenrolled}}class="m-t-1"{{/isenrolled}}>{{#str}}date, format_moodlemoot{{/str}}</h4>
-        <p>{{{ date }}}</p>
+        <h5 {{^isenrolled}}class="m-t-1"{{/isenrolled}}>{{#str}}date, format_moodlemoot{{/str}}</h5>
+        <h6>{{{ date }}}</h6>
 
-        <h4 class="m-t-1">{{#str}}enrollperiod, format_moodlemoot{{/str}}</h4>
-        <p>{{{ enrollperiod }}}</p>
+        <h5 class="m-t-1">{{#str}}enrollperiod, format_moodlemoot{{/str}}</h5>
+        <h6>{{{ enrollperiod }}}</h6>
 
-        <h4 class="m-t-1">{{#str}}place, format_moodlemoot{{/str}}</h4>
-        <p>{{{ place }}}</p>
+        <h5 class="m-t-1">{{#str}}place, format_moodlemoot{{/str}}</h5>
+        <h6>{{{ place }}}</h6>
 
-        <a target="_blank" href="{{{ placemapurl }}}" class="btn btn-outline-primary btn-lg btn-block">Ver mapa</a>
+        <a target="_blank" href="{{{ placemapurl }}}" class="btn btn-outline-primary btn-lg btn-block">{{#str}}seemap, format_moodlemoot{{/str}}</a>
     </div>
 </div>

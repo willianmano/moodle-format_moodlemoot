@@ -60,3 +60,5 @@ $string['hours'] = 'Horas';
 $string['workload'] = 'Carga horária';
 $string['enroled'] = 'Matrículas';
 $string['actions'] = 'Ações';
+$string['seemap'] = 'Ver mapa';
+$string['restrictcontentmsg'] = 'OS DEMAIS CONTEÚDOS SÃO VISÍVEIS APENAS PELOS INSCRITOS NO EVENTO.';
