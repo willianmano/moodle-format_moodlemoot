@@ -1,0 +1,32 @@
+<div class="row m-t-1 mx-0 p-b-1">
+    <div class="col-md-9 coursecontent">
+        {{{ course.summary }}}
+
+        {{> format_moodlemoot/sections }}
+
+        {{^isenrolled}}
+            <div class="notenrolled">DEMAIS CONTEUDOS RESTRITOS AOS INSCRITOS NO EVENTO</div>
+
+            {{> format_moodlemoot/enrol_button }}
+        {{/isenrolled}}
+    </div>
+
+    <div class="col-md-3 sidecontent">
+        {{^isenrolled}}
+            {{> format_moodlemoot/enrol_button }}
+
+            <p class="m-t-1"><span class="btn btn-lg btn-block btn-success">{{{ price }}}</span></p>
+        {{/isenrolled}}
+
+        <h4 {{^isenrolled}}class="m-t-1"{{/isenrolled}}>{{#str}}date, format_moodlemoot{{/str}}</h4>
+        <p>{{{ date }}}</p>
+
+        <h4 class="m-t-1">{{#str}}enrollperiod, format_moodlemoot{{/str}}</h4>
+        <p>{{{ enrollperiod }}}</p>
+
+        <h4 class="m-t-1">{{#str}}place, format_moodlemoot{{/str}}</h4>
+        <p>{{{ place }}}</p>
+
+        <a target="_blank" href="{{{ placemapurl }}}" class="btn btn-outline-primary btn-lg btn-block">Ver mapa</a>
+    </div>
+</div>

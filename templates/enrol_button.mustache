@@ -1,0 +1,19 @@
+{{#actionbutton}}
+    {{#hasenroldata}}
+        <form autocomplete="off" action="{{{config.wwwroot}}}/enrol/index.php" method="post" accept-charset="utf-8" id="mform1" class="mform">
+            <div class="d-none">
+                <input name="id" type="hidden" value="{{{courseid}}}">
+                <input name="instance" type="hidden" value="{{{instanceid}}}">
+                <input name="sesskey" type="hidden" value="{{{config.sesskey}}}">
+                <input name="_qf__{{{instanceid}}}_enrol_self_enrol_form" type="hidden" value="1">
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg btn-block" name="submitbutton" id="id_submitbutton">
+                {{#str}} enrolme, enrol_self {{/str}}
+            </button>
+        </form>
+    {{/hasenroldata}}
+    {{^hasenroldata}}
+        <a href="{{{url}}}" class="btn btn-default btn-lg btn-block">{{{text}}}</a>
+    {{/hasenroldata}}
+{{/actionbutton}}

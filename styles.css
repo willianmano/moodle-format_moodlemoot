@@ -1,0 +1,10 @@
+.format-moodlemoot .notenrolled {
+    padding: 1rem;
+    border: 1px dashed #c4c4c4;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.format-moodlemoot .course-content .sidecontent h4 {
+    border-bottom: 1px dashed #c4c4c4;
+}

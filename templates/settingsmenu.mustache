@@ -1,0 +1,27 @@
+{{#hassettingsmenu}}
+    <div class="context-header-settings-menu">
+        <div class="action-menu moodle-actionmenu float-right" data-enhance="moodle-core-actionmenu" id="action-menu-2">
+            <div class="menubar d-flex" id="action-menu-2-menubar" role="menubar">
+                <div class="action-menu-trigger">
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle" id="dropdown-2" title="Actions" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="icon fa fas fa-cog fa-fw" aria-hidden="true" aria-label=""></i>
+                            <span class="sr-only">{{#str}} actions, format_moodlemoot {{/str}}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right menu align-tr-br" id="action-menu-2-menu" data-rel="menu-content" role="menu" data-align="tr-br">
+                            {{#settingsmenu}}
+                                <a href="{{url}}" class="dropdown-item menu-action" role="menuitem">
+                                    {{#icon}}
+                                        {{{.}}}
+                                    {{/icon}}
+
+                                    {{{text}}}
+                                </a>
+                            {{/settingsmenu}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/hassettingsmenu}}

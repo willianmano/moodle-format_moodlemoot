@@ -1,0 +1,30 @@
+{{#sections}}
+    {{#available}}
+        <h3 class="m-t-2">{{{ name }}}</h3>
+
+        <ul class="list-group list-group-flush">
+            {{#activities}}
+                <li class="list-group-item">
+                    {{#available}}
+                        {{#url}}
+                            <a href="{{{ url }}}" {{#active}}class="active"{{/active}} {{#availableinfo}}data-toggle="tooltip" data-html="true" data-placement="right" title="{{{ availableinfo }}}"{{/availableinfo}}>
+                                {{#completed}}<i class="fa fa-check-circle completed"></i>{{/completed}}
+                                {{^completed}}<i class="fa fa-circle"></i>{{/completed}}
+                                <span>{{{ name }}}</span>
+                            </a>
+                        {{/url}}
+                        {{^url}}
+                            <h5 class="mb-0">{{{ name }}}</h5>
+                        {{/url}}
+                    {{/available}}
+                    {{^available}}
+                        <a href="javascript:void(0);" class="notavailable" data-toggle="tooltip" data-html="true" data-placement="right" title="{{{ availableinfo }}}"><i class="fa fa-circle icon"></i><span>{{{ name }}}</span> <span class="small">({{#str}}unavailable, theme_olm{{/str}})</span></a>
+                    {{/available}}
+                </li>
+            {{/activities}}
+        </ul>
+    {{/available}}
+    {{^available}}
+        <h3 class="notavailable" id="heading-{{{ id }}}" {{#availableinfo}}data-toggle="tooltip" data-html="true" data-placement="right" title="{{{ availableinfo }}}"{{/availableinfo}}>{{{ name }}} <span class="small">({{#str}}unavailable, theme_olm{{/str}})</span></h3>
+    {{/available}}
+{{/sections}}
