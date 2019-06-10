@@ -214,7 +214,7 @@ class introduction extends base implements page
 
     public function can_view_activity($mod) {
         if (!$mod->is_visible_on_course_page() || !$mod->visible) {
-            $modcontext = context_module::instance($mod->id);
+            $modcontext = \context_module::instance($mod->id);
             $canviewhidden = has_capability('moodle/course:viewhiddenactivities', $modcontext);
             if ($canviewhidden && !$mod->visible && $mod->get_section_info()->visible) {
                 return true;

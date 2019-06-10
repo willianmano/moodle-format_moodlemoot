@@ -52,27 +52,31 @@ class manager {
     return $data;
   }
 
-  /**
-   * Recover background url to section
-   *
-   * @return string
-   * @throws \dml_exception
-   */
-  public function get_courseheader_url() {
-    global $CFG;
+    /**
+     * Recover background url to section
+     *
+     * @return string
+     * @throws \dml_exception
+     */
+    public function get_courseheader_url() {
+        global $CFG;
 
-    require_once($CFG->dirroot . '/course/format/moodlemoot/lib.php');
+        require_once($CFG->dirroot . '/course/format/moodlemoot/lib.php');
 
-    $file = format_moodlemoot_get_file($this->course->courseheader);
+        $defaultimgurl = "$CFG->wwwroot/course/format/moodlemoot/pix/default_course_header.jpg";
 
-    if (is_null($file)) {
-      return $url = "$CFG->wwwroot/course/format/moodlemoot/pix/default_course_header.jpg";
+        if (!isset($this->course->courseheader)) {
+            return $defaultimgurl;
+        }
+
+        $file = format_moodlemoot_get_file($this->course->courseheader);
+
+        if (is_null($file)) {
+          return $defaultimgurl;
+        }
+
+        return "$CFG->wwwroot/pluginfile.php/$file->contextid/$file->component/$file->filearea/$file->itemid/$file->filename?forcedownload=1";
     }
-
-    $url = "$CFG->wwwroot/pluginfile.php/$file->contextid/$file->component/$file->filearea/$file->itemid/$file->filename?forcedownload=1";
-
-    return $url;
-  }
 
   /**
    * This is an optional menu that can be added to a layout by a theme. It contains the
