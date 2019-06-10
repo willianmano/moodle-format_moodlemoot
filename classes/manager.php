@@ -24,17 +24,14 @@ use action_menu;
 use navigation_node;
 use pix_icon;
 
-class manager
-{
+class manager {
   protected $course;
 
-  public function __construct($course)
-  {
+  public function __construct($course) {
     $this->course = $course;
   }
 
-  public function get_courseheader_data()
-  {
+  public function get_courseheader_data() {
     global $USER;
 
     $context = \context_course::instance($this->course->id);
@@ -61,9 +58,10 @@ class manager
    * @return string
    * @throws \dml_exception
    */
-  protected function get_courseheader_url()
-  {
+  public function get_courseheader_url() {
     global $CFG;
+
+    require_once($CFG->dirroot . '/course/format/moodlemoot/lib.php');
 
     $file = format_moodlemoot_get_file($this->course->courseheader);
 
