@@ -4,3 +4,7 @@
     margin: 1rem 0;
     text-align: center;
 }
+
+.format-moodlemoot .courseheader.introductionpage img {
+    width: 100%;
+}
