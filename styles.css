@@ -8,3 +8,25 @@
 .format-moodlemoot .courseheader.introductionpage img {
     width: 100%;
 }
+
+.format-moodlemoot .activity.notavailable {
+    color: #495057;
+}
+
+.format-moodlemoot .activity.notavailable p {
+    margin-bottom: 0;
+}
+
+.format-moodlemoot .activity.notavailable .availableinfo {
+    font-size: 80%;
+    font-weight: 400;
+    padding-left: 2rem;
+}
+
+.format-moodlemoot .activity.notavailable .availableinfo ul {
+    padding-left: 2rem;
+}
+
+.format-moodlemoot .course-content ul.section {
+    padding: 0;
+}

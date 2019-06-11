@@ -62,3 +62,4 @@ $string['enroled'] = 'Enroled users';
 $string['actions'] = 'Actions';
 $string['seemap'] = 'See map';
 $string['restrictcontentmsg'] = 'THE OTHER CONTENTS ARE VISIBLE ONLY BY PEOPLE ENROLLED IN THE EVENT.';
+$string['unavailable'] = 'unavailable';

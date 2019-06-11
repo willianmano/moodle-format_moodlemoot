@@ -1,10 +1,10 @@
 {{#sections}}
     {{#available}}
-        <h3>{{{ name }}}</h3>
+        <h4>{{{ name }}}</h4>
 
-        <ul class="list-group list-group-flush">
+        <ul class="section">
             {{#activities}}
-                <li class="list-group-item">
+                <li class="activity {{{ modtype }}} modtype_{{{ modtype }}}">
                     {{#available}}
                         {{#url}}
                             <a href="{{{ url }}}" {{#active}}class="active"{{/active}} {{#availableinfo}}data-toggle="tooltip" data-html="true" data-placement="right" title="{{{ availableinfo }}}"{{/availableinfo}}>
@@ -18,7 +18,10 @@
                         {{/url}}
                     {{/available}}
                     {{^available}}
-                        <a href="javascript:void(0);" class="notavailable" data-toggle="tooltip" data-html="true" data-placement="right" title="{{{ availableinfo }}}"><i class="fa fa-circle icon"></i><span>{{{ name }}}</span> <span class="small">({{#str}}unavailable, theme_olm{{/str}})</span></a>
+                        <div class="activity notavailable">
+                            <p><i class="fa fa-circle icon"></i><span>{{{ name }}}</span> <span class="small">({{#str}}unavailable, format_moodlemoot{{/str}})</span></p>
+                            <div class="availableinfo">{{{ availableinfo }}}</div>
+                        </div>
                     {{/available}}
                 </li>
             {{/activities}}

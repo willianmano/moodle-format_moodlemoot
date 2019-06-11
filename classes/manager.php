@@ -272,38 +272,14 @@ class manager {
     return $menu;
   }
 
-  public function get_course_sections($currentsection)
-  {
-    $sections = course_get_format($this->course)->get_sections();
+    public function get_section_by_cmid($cmid) {
+        global $DB;
 
-    $sectionsdata = [];
+        $sql = 'SELECT s.* FROM {course_modules} cm
+        INNER JOIN {course_sections} s ON cm.section = s.id
+        WHERE cm.id = :cmid';
 
-    foreach ($sections as $section) {
-      if (!$section->visible) {
-        continue;
-      }
-
-      $isactive = $section->section == $currentsection ? true : false;
-
-      $sectionsdata[] = [
-        'section' => $section->section,
-        'name' => get_section_name($this->course, $section),
-        'isactive' => $isactive
-      ];
+        return $DB->get_record_sql($sql, ['cmid' => $cmid]);
     }
-
-    return $sectionsdata;
-  }
-
-  public function get_section_by_cmid($cmid)
-  {
-    global $DB;
-
-    $sql = 'SELECT s.* FROM {course_modules} cm
-      INNER JOIN {course_sections} s ON cm.section = s.id
-      WHERE cm.id = :cmid';
-
-    return $DB->get_record_sql($sql, ['cmid' => $cmid]);
-  }
 }
 

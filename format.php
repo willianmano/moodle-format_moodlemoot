@@ -29,6 +29,8 @@ $page = optional_param('page', null, PARAM_TEXT);
 $context = context_course::instance($course->id);
 // Retrieve course format option fields and add them to the $course object.
 $course = course_get_format($course)->get_course();
+$course->coursedisplay = COURSE_DISPLAY_SINGLEPAGE;
+$course->hiddensections = true;
 
 // Make sure section 0 is created.
 course_create_sections_if_missing($course, 0);
@@ -58,8 +60,6 @@ $renderer = $PAGE->get_renderer('format_moodlemoot');
 
 switch ($page) {
     case 'course':
-//        $renderer->course_page($course);
-        $course->coursedisplay = COURSE_DISPLAY_SINGLEPAGE;
         $renderer->print_multiple_section_page($course, null, null, null, null);
     break;
     case 'introduction':
