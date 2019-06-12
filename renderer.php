@@ -42,13 +42,15 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
     public function __construct(moodle_page $page, $target) {
         parent::__construct($page, $target);
 
-        // Since format_topics_renderer::section_edit_controls() only displays the 'Set current section' control when editing mode is on
-        // we need to be sure that the link 'Turn editing mode on' is available for a user who does not have any other managing capability.
+        // Since format_topics_renderer::section_edit_controls() only displays the 'Set current section' control
+        // when editing mode is on we need to be sure that the link 'Turn editing mode on' is available
+        // for a user who does not have any other managing capability.
         $page->set_other_editing_capability('moodle/course:setcurrentsection');
     }
 
     /**
      * Generate the starting container html for a list of sections
+     *
      * @return string HTML to output.
      */
     protected function start_section_list() {
@@ -57,6 +59,7 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
 
     /**
      * Generate the closing container html for a list of sections
+     *
      * @return string HTML to output.
      */
     protected function end_section_list() {
@@ -65,7 +68,10 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
 
     /**
      * Generate the title for this section page
+     *
      * @return string the page title
+     *
+     * @throws coding_exception
      */
     protected function page_title() {
         return get_string('topicoutline');
@@ -76,6 +82,7 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
      *
      * @param stdClass $section The course_section entry from DB
      * @param stdClass $course The course entry from DB
+     *
      * @return string HTML to output.
      */
     public function section_title($section, $course) {
@@ -87,6 +94,7 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
      *
      * @param stdClass $section The course_section entry from DB
      * @param stdClass $course The course entry from DB
+     *
      * @return string HTML to output.
      */
     public function section_title_without_link($section, $course) {
@@ -99,7 +107,10 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
      * @param stdClass $course The course entry from DB
      * @param stdClass $section The course_section entry from DB
      * @param bool $onsectionpage true if being printed on a section page
+     *
      * @return array of edit control items
+     *
+     * @throws coding_exception
      */
     protected function section_edit_control_items($course, $section, $onsectionpage = false) {
         global $PAGE;
@@ -167,6 +178,10 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
      * @param array $mods (argument not used)
      * @param array $modnames (argument not used)
      * @param array $modnamesused (argument not used)
+     * @param bool $isenrolled
+     *
+     * @throws coding_exception
+     * @throws moodle_exception
      */
     public function print_multiple_section_page($course, $sections, $mods, $modnames, $modnamesused, $isenrolled = false) {
         global $PAGE;
@@ -195,7 +210,7 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
             }
 
             if ($section == 0) {
-                // 0-section is displayed a little different then the others
+                // Section 0 is displayed a little different then the others.
                 if ($thissection->summary or !empty($modinfo->sections[0]) or $PAGE->user_is_editing()) {
                     echo $this->section_header($thissection, $course, false, 0);
                     echo $this->courserenderer->course_section_cm_list($course, $thissection, 0);
@@ -205,7 +220,7 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
                 continue;
             }
             if ($section > $numsections) {
-                // activities inside this section are 'orphaned', this section will be printed as 'stealth' below
+                // Activities inside this section are 'orphaned', this section will be printed as 'stealth' below.
                 continue;
             }
             // Show the section if the user is permitted to access it, OR if it's not available
@@ -235,7 +250,7 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
             // Print stealth sections if present.
             foreach ($modinfo->get_section_info_all() as $section => $thissection) {
                 if ($section <= $numsections or empty($modinfo->sections[$section])) {
-                    // this is not stealth section or it is empty
+                    // This is not stealth section or it is empty.
                     continue;
                 }
                 echo $this->stealth_section_header($section);
@@ -256,6 +271,7 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
      * Introduction page for moodlemoot format
      *
      * @param stdClass $course
+     *
      * @throws moodle_exception
      */
     public function introduction_page(\stdClass $course) {

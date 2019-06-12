@@ -45,10 +45,14 @@ class format_moodlemoot extends format_base
      * Use section name is specified by user. Otherwise use default ("Topic #")
      *
      * @param int|stdClass $section Section object from database or just field section.section
+     *
      * @return string Display name that the course format prefers, e.g. "Topic 2"
+     *
+     * @throws moodle_exception
      */
     public function get_section_name($section) {
         $section = $this->get_section($section);
+
         if ((string)$section->name !== '') {
             return format_string($section->name, true,
                 array('context' => context_course::instance($this->courseid)));
@@ -65,7 +69,10 @@ class format_moodlemoot extends format_base
      * the string with the key = 'sectionname' from the course format's lang file + the section number will be used.
      *
      * @param stdClass $section Section object from database or just field course_sections section
+     *
      * @return string The default value for the section name.
+     *
+     * @throws coding_exception
      */
     public function get_default_section_name($section) {
         if ($section->section == 0) {
@@ -86,11 +93,12 @@ class format_moodlemoot extends format_base
      * @param array $options options for view URL. At the moment core uses:
      *     'navigation' (bool) if true and section has no separate page, the function returns null
      *     'sr' (int) used by multipage formats to specify to which section to return
+     *
      * @return null|moodle_url
+     *
+     * @throws moodle_exception
      */
     public function get_view_url($section, $options = array()) {
-        global $CFG;
-
         $course = $this->get_course();
 
         $url = new moodle_url('/course/view.php', array('id' => $course->id));
@@ -119,8 +127,10 @@ class format_moodlemoot extends format_base
      * Used in course/rest.php
      *
      * @return array This will be passed in ajax respose
+     *
+     * @throws moodle_exception
      */
-    function ajax_section_move() {
+    public function ajax_section_move() {
         global $PAGE;
 
         $titles = array();
@@ -168,7 +178,10 @@ class format_moodlemoot extends format_base
      * @param bool $editable
      * @param null|lang_string|string $edithint
      * @param null|lang_string|string $editlabel
+     *
      * @return \core\output\inplace_editable
+     *
+     * @throws coding_exception
      */
     public function inplace_editable_render_section_name($section, $linkifneeded = true,
                                                          $editable = null, $edithint = null, $editlabel = null) {
@@ -206,6 +219,18 @@ class format_moodlemoot extends format_base
         return !$section->section || $section->visible;
     }
 
+    /**
+     * Section action.
+     *
+     * @param section_info|stdClass $section
+     * @param string $action
+     * @param int $sr
+     *
+     * @return array|stdClass|null
+     *
+     * @throws moodle_exception
+     * @throws required_capability_exception
+     */
     public function section_action($section, $action, $sr) {
         global $PAGE;
 
@@ -376,8 +401,7 @@ function format_moodlemoot_inplace_editable($itemtype, $itemid, $newvalue) {
  * @param array $options
  * @throws dml_exception
  */
-function format_moodlemoot_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array())
-{
+function format_moodlemoot_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
     // Default params.
     $itemid = $args[0];
     $filter = 0;
@@ -433,8 +457,7 @@ function format_moodlemoot_pluginfile($course, $cm, $context, $filearea, $args, 
  * @return stdClass|null    File object or null if file not exists
  * @throws dml_exception
  */
-function format_moodlemoot_get_file($id)
-{
+function format_moodlemoot_get_file($id) {
     global $DB;
 
     $file = null;

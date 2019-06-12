@@ -69,8 +69,7 @@ class introduction extends \format_moodlemoot_renderer {
      * @throws \dml_exception
      * @throws \moodle_exception
      */
-    public function render_page_header()
-    {
+    public function render_page_header() {
         $manager = new manager($this->course);
 
         $data = $manager->get_courseheader_data();
@@ -85,8 +84,7 @@ class introduction extends \format_moodlemoot_renderer {
      * @return bool|string
      * @throws \moodle_exception
      */
-    public function render_page_body()
-    {
+    public function render_page_body() {
         $data = course_get_format($this->course)->get_introduction_data();
 
         $data['course'] = $this->course;
@@ -108,8 +106,7 @@ class introduction extends \format_moodlemoot_renderer {
         return $this->render_from_template('format_moodlemoot/body_introduction', $data);
     }
 
-    protected function get_action_button()
-    {
+    protected function get_action_button() {
         global $CFG;
 
         $data['hasenroldata'] = false;
@@ -149,6 +146,11 @@ class introduction extends \format_moodlemoot_renderer {
         return $data;
     }
 
+    /**
+     * Returns if the whether the user is enrolled in the course or not.
+     *
+     * @return bool
+     */
     public function is_course_enrolled() {
         global $USER;
 
