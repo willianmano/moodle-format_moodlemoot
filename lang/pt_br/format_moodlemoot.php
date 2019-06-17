@@ -41,8 +41,6 @@ $string['privacy:metadata'] = 'The MoodleMoot format plugin does not store any p
 
 $string['courseheader'] = "Imagem de cabeçalho do curso";
 $string['courseheader_help'] = "The image displayed on the overview page. Recommended resolution 2000x1500 pixels.";
-$string['price'] = 'Preço';
-$string['price_help'] = 'Valor do evento.';
 $string['enrollperiod'] = 'Período de inscrições';
 $string['enrollperiod_help'] = 'Período de inscrições no evento.';
 $string['date'] = 'Data do evento';

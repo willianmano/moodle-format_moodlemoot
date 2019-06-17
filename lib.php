@@ -281,15 +281,6 @@ class format_moodlemoot extends format_base
                     )
                 ),
             ),
-            'price' => array(
-                'type' => PARAM_TEXT,
-                'label' => get_string('price', 'format_moodlemoot'),
-                'help' => 'price',
-                'element_type' => 'text',
-                'default' => '',
-                'cache' => true,
-                'cachedefault' => 0,
-            ),
             'enrollperiod' => array(
                 'type' => PARAM_CLEANHTML,
                 'label' => get_string('enrollperiod', 'format_moodlemoot'),
@@ -358,7 +349,6 @@ class format_moodlemoot extends format_base
      * @return stdClass data for course welcome message
      */
     public function get_introduction_data() {
-        $introduction['price'] = !empty($this->course->price) ? $this->course->price : null;
         $introduction['enrollperiod'] = !empty($this->course->enrollperiod) ? $this->course->enrollperiod : null;
         $introduction['date'] = !empty($this->course->date) ? $this->course->date : null;
         $introduction['place'] = !empty($this->course->place) ? $this->course->place : null;

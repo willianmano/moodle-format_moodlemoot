@@ -5,6 +5,16 @@
     text-align: center;
 }
 
+.format-moodlemoot .coursecontent .mform,
+.format-moodlemoot .sidecontent .mform {
+    margin-bottom: 1rem;
+}
+
+.format-moodlemoot .coursecontent .mform:last-of-type,
+.format-moodlemoot .sidecontent .mform:last-of-type {
+    margin-bottom: 0;
+}
+
 .format-moodlemoot .courseheader.introductionpage img {
     width: 100%;
 }

@@ -93,7 +93,7 @@ class introduction extends \format_moodlemoot_renderer {
         $coursecatstr = $coursecat->get_formatted_name();
         $data['course']->categorystr = $coursecatstr;
 
-        $data['actionbutton'] = $this->get_action_button();
+        $data['enrolmentinstances'] = $this->get_enrolment_instances();
 
         ob_start();
         $this->print_multiple_section_page($this->course, null, null, null, null, $this->is_course_enrolled());
@@ -106,47 +106,68 @@ class introduction extends \format_moodlemoot_renderer {
         return $this->render_from_template('format_moodlemoot/body_introduction', $data);
     }
 
-    protected function get_action_button() {
-        global $CFG;
-
+    protected function get_enrolment_instances() {
         $data['hasenroldata'] = false;
+
         if (isguestuser()) {
-            $data['url'] = new \moodle_url($CFG->wwwroot . '/login/index.php');
-            $data['text'] = get_string('dologin', 'format_moodlemoot');
+            $data['enrolinstances'][] = [
+                'name' => get_string('dologin', 'format_moodlemoot')
+            ];
 
             return $data;
+        }
+
+        // Enrolled users doesn't need see this link anymore.
+        if ($this->is_course_enrolled()) {
+            return false;
         }
 
         // For logged in users, we must check course configs.
         $instances = enrol_get_instances($this->course->id, true);
 
-        // Enrolled users doesn't need see this link anymore.
-        if ($this->is_course_enrolled()) {
-            return null;
-        }
-
-        $enrolinstance = false;
+        $enrolinstances = [];
         foreach ($instances as $instance) {
-            if (in_array($instance->enrol, ['self', 'pagseguro']) &&
-                $instance->enrolstartdate < time() &&
-                $instance->enrolenddate > time()
-            ) {
-                $enrolinstance = $instance;
+            if ($this->is_enrolinstance_enabled($instance)) {
+                $enrolinstances[] = [
+                    'id' => $instance->id,
+                    'enrol' => $instance->enrol,
+                    'courseid' => $instance->courseid,
+                    'name' => $instance->name ?: get_string('enrolme', 'enrol_self'),
+                    'cost' => $instance->cost ? number_format($instance->cost, 2, ',', '.') : false,
+                    'currency' => $instance->currency ?: false,
+                    'class' => $instance->enrol == 'self' ? 'btn-success' : 'btn-primary'
+                ];
             }
         }
 
-        if (!$enrolinstance) {
-            $data['url'] = '#';
-            $data['text'] = get_string('enrolnotavailable', 'format_moodlemoot');
+        if (!$enrolinstances) {
+            $data['enrolinstances'][] = [
+                'name' => get_string('enrolnotavailable', 'format_moodlemoot')
+            ];
 
-            return $data;
+            return $enrolinstances;
         }
 
         $data['hasenroldata'] = true;
-        $data['courseid'] = $enrolinstance->courseid;
-        $data['instanceid'] = $enrolinstance->id;
+        $data['enrolinstances'] = $enrolinstances;
 
         return $data;
+    }
+
+    protected function is_enrolinstance_enabled($instance) {
+        if (!in_array($instance->enrol, ['self', 'pagseguro'])) {
+            return false;
+        }
+
+        if ($instance->enrolstartdate > 0 && $instance->enrolstartdate > time()) {
+            return false;
+        }
+
+        if ($instance->enrolenddate > 0 && $instance->enrolenddate < time()) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

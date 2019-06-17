@@ -1,21 +1,19 @@
 <div class="row m-t-1 mx-0 p-b-1">
-    <div class="col-md-9 coursecontent">
+    <div class="col-md-8 coursecontent">
         {{{ course.summary }}}
 
         {{{ sections }}}
 
         {{^isenrolled}}
-            {{> format_moodlemoot/enrol_button }}
+            {{> format_moodlemoot/enrolment_buttons }}
 
             <div class="notenrolled">{{#str}}restrictcontentmsg, format_moodlemoot{{/str}}</div>
         {{/isenrolled}}
     </div>
 
-    <div class="col-md-3 sidecontent">
+    <div class="col-md-4 sidecontent">
         {{^isenrolled}}
-            {{> format_moodlemoot/enrol_button }}
-
-            <p class="m-t-1"><span class="btn btn-lg btn-block btn-outline-success">{{{ price }}}</span></p>
+            {{> format_moodlemoot/enrolment_buttons }}
         {{/isenrolled}}
 
         <h5 {{^isenrolled}}class="m-t-1"{{/isenrolled}}>{{#str}}date, format_moodlemoot{{/str}}</h5>
