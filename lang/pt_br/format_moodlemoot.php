@@ -61,5 +61,5 @@ $string['workload'] = 'Carga horária';
 $string['enroled'] = 'Matrículas';
 $string['actions'] = 'Ações';
 $string['seemap'] = 'Ver mapa';
-$string['restrictcontentmsg'] = 'OS DEMAIS CONTEÚDOS SÃO VISÍVEIS APENAS PELOS INSCRITOS NO EVENTO.';
+$string['restrictcontentmsg'] = 'OS DEMAIS CONTEÚDOS SÃO VISÍVEIS APENAS PARA OS INSCRITOS NO EVENTO.';
 $string['unavailable'] = 'indisponível';
