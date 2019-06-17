@@ -125,14 +125,17 @@ class introduction extends \format_moodlemoot_renderer {
             return null;
         }
 
-        $selfinstance = false;
+        $enrolinstance = false;
         foreach ($instances as $instance) {
-            if ($instance->enrol === 'self') {
-                $selfinstance = $instance;
+            if (in_array($instance->enrol, ['self', 'pagseguro']) &&
+                $instance->enrolstartdate < time() &&
+                $instance->enrolenddate > time()
+            ) {
+                $enrolinstance = $instance;
             }
         }
 
-        if (!$selfinstance) {
+        if (!$enrolinstance) {
             $data['url'] = '#';
             $data['text'] = get_string('enrolnotavailable', 'format_moodlemoot');
 
@@ -140,8 +143,8 @@ class introduction extends \format_moodlemoot_renderer {
         }
 
         $data['hasenroldata'] = true;
-        $data['courseid'] = $selfinstance->courseid;
-        $data['instanceid'] = $selfinstance->id;
+        $data['courseid'] = $enrolinstance->courseid;
+        $data['instanceid'] = $enrolinstance->id;
 
         return $data;
     }
