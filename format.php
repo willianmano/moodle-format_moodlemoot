@@ -68,7 +68,7 @@ switch ($page) {
     break;
 }
 
-if ($page == 'course') {
+if ($page == 'course' || $page == 'introduction') {
     // Include course format js module.
     $PAGE->requires->js('/course/format/moodlemoot/format.js');
 }
