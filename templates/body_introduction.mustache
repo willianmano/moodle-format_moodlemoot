@@ -16,15 +16,23 @@
             {{> format_moodlemoot/enrolment_buttons }}
         {{/isenrolled}}
 
-        <h5 {{^isenrolled}}class="m-t-1"{{/isenrolled}}>{{#str}}date, format_moodlemoot{{/str}}</h5>
-        <h6>{{{ date }}}</h6>
+        {{#date}}
+            <h5 {{^isenrolled}}class="m-t-1"{{/isenrolled}}>{{#str}}date, format_moodlemoot{{/str}}</h5>
+            <h6>{{{ date }}}</h6>
+        {{/date}}
 
-        <h5 class="m-t-1">{{#str}}enrollperiod, format_moodlemoot{{/str}}</h5>
-        <h6>{{{ enrollperiod }}}</h6>
+        {{#enrollperiod}}
+            <h5 class="m-t-1">{{#str}}enrollperiod, format_moodlemoot{{/str}}</h5>
+            <h6>{{{ enrollperiod }}}</h6>
+        {{/enrollperiod}}
 
-        <h5 class="m-t-1">{{#str}}place, format_moodlemoot{{/str}}</h5>
-        <h6>{{{ place }}}</h6>
+        {{#place}}
+            <h5 class="m-t-1">{{#str}}place, format_moodlemoot{{/str}}</h5>
+            <h6>{{{ place }}}</h6>
+        {{/place}}
 
-        <a target="_blank" href="{{{ placemapurl }}}" class="btn btn-outline-primary btn-lg btn-block">{{#str}}seemap, format_moodlemoot{{/str}}</a>
+        {{#placemapurl}}
+            <a target="_blank" href="{{{ placemapurl }}}" class="btn btn-outline-primary btn-lg btn-block">{{#str}}seemap, format_moodlemoot{{/str}}</a>
+        {{/placemapurl}}
     </div>
 </div>
