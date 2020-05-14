@@ -184,7 +184,7 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
      * @throws moodle_exception
      */
     public function print_multiple_section_page($course, $sections, $mods, $modnames, $modnamesused, $isenrolled = false) {
-        global $PAGE;
+        global $PAGE, $USER;
 
         $modinfo = get_fast_modinfo($course);
         $course = course_get_format($course)->get_course();
@@ -202,10 +202,11 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
         echo $this->start_section_list();
         $numsections = course_get_format($course)->get_last_section_number();
 
+        $caneditcourse = has_capability('moodle/course:update', $context);
         foreach ($modinfo->get_section_info_all() as $section => $thissection) {
 
             // Nao exibe demais topicos para usuarios nao inscritos.
-            if (!$isenrolled && $section > 0) {
+            if (!$caneditcourse && $section > 0) {
                 break;
             }
 
@@ -246,7 +247,7 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
             }
         }
 
-        if ($PAGE->user_is_editing() and has_capability('moodle/course:update', $context)) {
+        if ($PAGE->user_is_editing() && $caneditcourse) {
             // Print stealth sections if present.
             foreach ($modinfo->get_section_info_all() as $section => $thissection) {
                 if ($section <= $numsections or empty($modinfo->sections[$section])) {
