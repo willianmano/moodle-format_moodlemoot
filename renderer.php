@@ -206,7 +206,7 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
         foreach ($modinfo->get_section_info_all() as $section => $thissection) {
 
             // Nao exibe demais topicos para usuarios nao inscritos.
-            if (!$caneditcourse && $section > 0) {
+            if (!($caneditcourse || $isenrolled) && $section > 0) {
                 break;
             }
 
