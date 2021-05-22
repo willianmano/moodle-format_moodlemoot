@@ -58,12 +58,21 @@ class manager {
         $url = new moodle_url(course_get_url($this->course), array('page' => 'course'));
         $data['courseurl'] = $url->out();
 
-        $headersettings = $this->context_header_settings_menu()->get_secondary_actions();
-
-        $data['settingsmenu'] = $this->extract_settingsmenu_icons($headersettings);
+        $data['settingsmenu'] = $this->get_header_settings_menu();
         $data['hassettingsmenu'] = count($data['settingsmenu']) == 0 ? false : true;
 
         return $data;
+    }
+
+    /**
+     * Returns course header settings menu
+     *
+     * @return array
+     */
+    public function get_header_settings_menu() {
+        $headersettings = $this->context_header_settings_menu()->get_secondary_actions();
+
+        return $this->extract_settingsmenu_icons($headersettings);
     }
 
     /**

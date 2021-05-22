@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 use format_moodlemoot\output\pages\introduction;
-use format_moodlemoot\output\pages\course;
+use format_moodlemoot\output\settingsmenu;
 
 require_once($CFG->dirroot . '/course/format/renderer.php');
 
@@ -198,6 +198,11 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
         // Copy activity clipboard..
         echo $this->course_activity_clipboard($course, 0);
 
+        $headersettingsmenu = new settingsmenu($course);
+        echo "<div class='inline-settingsmenu'>";
+        echo $this->render($headersettingsmenu);
+        echo "</div>";
+
         // Now the list of sections..
         echo $this->start_section_list();
         $numsections = course_get_format($course)->get_last_section_number();
@@ -279,6 +284,18 @@ class format_moodlemoot_renderer extends format_section_renderer_base {
         $introductionrenderer = new introduction($this->page, $this->target, $course);
 
         echo $introductionrenderer->render_page();
+    }
+
+    /**
+     * Settings menu
+     *
+     * @param renderable $page
+     * @return bool|string
+     */
+    public function render_settingsmenu(renderable $page) {
+        $data = $page->export_for_template($this);
+
+        return $this->render_from_template('format_moodlemoot/settingsmenu', $data);
     }
 }
 
