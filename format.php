@@ -35,9 +35,13 @@ $course->hiddensections = true;
 // Make sure section 0 is created.
 course_create_sections_if_missing($course, 0);
 
+$caneditcourse = false;
+if (!has_capability('moodle/course:update', $context)) {
+    $caneditcourse = true;
+}
 // If is guest user or non-enrolled, can only access introduction page.
 // Don't allow access for anyone to anywhere in course.
-if (isguestuser($USER) || (!is_enrolled($context, $USER) && !is_siteadmin($USER))) {
+if (isguestuser($USER) || (!is_enrolled($context, $USER) && !$caneditcourse)) {
     $page = 'introduction';
 }
 
@@ -45,11 +49,11 @@ if (!$page && (is_enrolled($context, $USER->id))) {
     $page = 'introduction';
 }
 
-if (!$page && (is_siteadmin($USER) || $PAGE->user_is_editing())) {
+if (!$page && ($caneditcourse || $PAGE->user_is_editing())) {
     $page = 'course';
 }
 
-if ($page != 'introduction' && (!is_siteadmin($USER))) {
+if ($page != 'introduction' && (!$caneditcourse)) {
     $page = 'introduction';
 }
 
