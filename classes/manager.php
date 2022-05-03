@@ -279,13 +279,12 @@ class manager {
      * @throws \coding_exception
      */
     private function extract_settingsmenu_icons($items) {
-        global $USER, $OUTPUT;
+        global $OUTPUT;
 
         $context = \context_course::instance($this->course->id);
-        $iseditingteacher = user_has_role_assignment($USER->id, 3, $context->id);
 
         $menu = [];
-        if (!is_siteadmin() && !$iseditingteacher) {
+        if (!has_capability('moodle/course:update', $context)) {
             return $menu;
         }
 
